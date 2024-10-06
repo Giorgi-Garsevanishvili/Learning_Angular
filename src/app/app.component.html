@@ -1,0 +1,19 @@
+  <div class="container">
+
+    <div *ngIf="items.length === 0; else showItems">
+      there are no list to show!
+    </div>
+
+  <ng-template #showItems>
+    <ul class="wish-list">
+      <li *ngFor="let item of items">
+          <div class="form-check"> 
+            <label class="form-check-label"> 
+              <input class="checkbox" type="checkbox"> {{item.wishText}}
+            </label> 
+          </div>
+      </li>
+    </ul>
+  </ng-template>
+
+  </div>
