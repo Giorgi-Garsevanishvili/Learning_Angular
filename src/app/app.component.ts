@@ -21,7 +21,17 @@ export class AppComponent {
 
   ListFilter : string ='0';
 
-  visibleItems : WishItem[] = this.items;
+  get visibleItems() : WishItem[] {
+    let value = this.ListFilter;
+
+    if (value === '0') {
+      return  this.items;
+    } else if (value === '1') {
+      return this.items.filter(item => !item.isCompleted);
+    } else {
+      return this.items.filter(item => item.isCompleted);
+    }
+  };
 
   newWishText = '';
   title = 'wishlist';
@@ -30,16 +40,6 @@ export class AppComponent {
   addToWishList () {
     this.items.push(new WishItem(this.newWishText));
     this.newWishText = '';
-  }
-
-  FilterChanged(value: any){
-    if (value === '0') {
-      this.visibleItems = this.items;
-    } else if (value === '1') {
-      this.visibleItems = this.items.filter(item => !item.isCompleted);
-    } else {
-      this.visibleItems = this.items.filter(item => item.isCompleted);
-    }
   }
 
   toggleItem(item : WishItem){
